@@ -69,6 +69,7 @@ const tabs = [
   { href: '#topic', label: 'Topic' },
   { href: '#background', label: 'Background' },
   { href: '#research', label: 'My Research' },
+  { href: '#findings', label: 'Findings' },
   { href: '#about', label: 'About Ben' },
 ];
 
@@ -77,6 +78,25 @@ const findings = [
   'Movement analysis systems can read data from wearables, motion capture, smartphone sensors, and remote rehab platforms.',
   'Interview participants consistently said AI should support therapists, not replace clinical reasoning, empathy, ethical judgment, or hands-on care.',
   'Bias, privacy, reliability, and unequal access to advanced technology remain major concerns for real clinics.',
+];
+
+const researchDetails = [
+  {
+    title: 'How the Research Was Built',
+    body: 'The project began with medical publications, research articles, and sources on AI, machine learning, and rehabilitation tools. That secondary research created the foundation for understanding where AI is already being used in physical therapy.',
+  },
+  {
+    title: 'Primary Interviews',
+    body: 'Five people connected to rehabilitation, physical therapy education, sports medicine, and AI shared their views through virtual interviews. Their answers were summarized and coded for repeated themes.',
+  },
+  {
+    title: 'What Professionals Agreed On',
+    body: 'Participants repeatedly described AI as useful for documentation, movement tracking, remote rehabilitation, and data analysis. They also agreed that therapists must still review AI-generated information and remain responsible for patient care.',
+  },
+  {
+    title: 'Research Limitations',
+    body: 'The study used a small interview sample, and participants had different levels of experience with AI. Future research could include more professionals, more healthcare fields, and patient perspectives on AI-assisted rehabilitation.',
+  },
 ];
 
 function Hero() {
@@ -97,7 +117,7 @@ function Hero() {
             <a href="#" className="text-2xl font-semibold tracking-tight">
               DIGNAN
             </a>
-            <div className="hidden items-center gap-8 md:flex">
+            <div className="hidden items-center gap-5 lg:gap-8 md:flex">
               {tabs.map((tab) => (
                 <a className="text-sm text-white transition hover:text-gray-300" href={tab.href} key={tab.href}>
                   {tab.label}
@@ -221,14 +241,14 @@ function App() {
           <article className="liquid-glass rounded-xl p-6 md:p-8">
             <h3 className="mb-4 text-2xl font-medium">Abstract</h3>
             <p className="leading-8 text-gray-300">
-              Artificial intelligence is becoming increasingly integrated into healthcare systems, including
-              physical therapy and rehabilitation sciences. This paper investigates the role of AI in physical
-              therapy, focusing on machine learning movement analysis, AI-assisted documentation systems,
-              predictive recovery models, and tele-rehabilitation platforms. The findings show that AI can
-              improve efficiency, documentation, movement analysis, and patient accessibility. However,
-              interviews and literature consistently emphasized that AI cannot replace clinical reasoning,
-              empathy, ethical judgment, and manual treatment techniques. Overall, AI is most likely to
-              function as a supportive clinical tool rather than a replacement for therapists.
+              In today's modern age, many aspiring professionals question how safe their future job is from AI
+              replacement. The research process described in this paper outlines how AI will impact physical
+              therapists in the future. The research begins with medical publications, research articles about AI,
+              machine learning, and rehabilitative tools to build a basic understanding of the field. Professionals
+              were then inquired to participate in an interview. Professors, researchers, authors, therapists, and
+              students all shared their insights, and one common pattern emerged. AI is an effective tool in
+              boosting efficiency and holds promise in virtual contact or movement tracking technologies, but it
+              lacks clinical decision making skills and empathy for patients, raising ethical concerns.
             </p>
           </article>
           <aside className="space-y-4">
@@ -245,6 +265,34 @@ function App() {
               Download Full Research Paper
             </a>
           </aside>
+        </div>
+      </section>
+
+      <section className="section-shell px-6 py-20 md:px-12 lg:px-16" id="findings">
+        <SectionHeader
+          eyebrow="Findings"
+          title="The research points toward a blended future for physical therapy."
+          intro="The updated essay argues that AI will likely become part of physical therapy, but mainly as an assistive tool. The strongest pattern across the literature and interviews was that machines can improve efficiency, while therapists remain essential for judgment, hands-on treatment, and patient trust."
+        />
+        <div className="grid gap-5 md:grid-cols-2">
+          {researchDetails.map((detail) => (
+            <article className="border-t border-white/20 pt-6" key={detail.title}>
+              <h3 className="mb-3 text-xl font-medium">{detail.title}</h3>
+              <p className="leading-7 text-gray-300">{detail.body}</p>
+            </article>
+          ))}
+        </div>
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {[
+            ['Efficiency', 'AI can reduce documentation time and help therapists focus more energy on direct patient interaction.'],
+            ['Access', 'Remote rehabilitation and guided exercise systems may help patients who live far from clinics or have transportation limitations.'],
+            ['Ethics', 'Bias, data quality, patient privacy, and overreliance on automated systems must be addressed before AI can be trusted in every clinical setting.'],
+          ].map(([title, body]) => (
+            <div className="liquid-glass rounded-xl p-6" key={title}>
+              <p className="mb-2 text-sm uppercase tracking-[0.24em] text-gray-400">{title}</p>
+              <p className="leading-7 text-gray-300">{body}</p>
+            </div>
+          ))}
         </div>
       </section>
 
