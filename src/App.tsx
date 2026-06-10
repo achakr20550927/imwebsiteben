@@ -99,6 +99,30 @@ const researchDetails = [
   },
 ];
 
+const researchArtifacts = [
+  {
+    title: 'Annotated Source List / Annotated Bibliography',
+    description: 'A source list showing the scholarly and medical background research used to build the project.',
+    href: '/annotated-source-list.pdf',
+    embed: '/annotated-source-list.pdf',
+    action: 'Download Annotated Source List',
+  },
+  {
+    title: 'Research Proposal Presentation',
+    description: 'The hypothesis and proposal presentation for Hands-On vs. High-Tech.',
+    href: '/research-proposal-presentation.pptx',
+    embed: 'office',
+    action: 'Download Presentation',
+  },
+  {
+    title: 'Interviews and Data Collection',
+    description: 'The data collection and analysis work connected to the interview phase of the research.',
+    href: '/data-collection-analysis.pdf',
+    embed: '/data-collection-analysis.pdf',
+    action: 'Download Data Collection',
+  },
+];
+
 function Hero() {
   return (
     <section className="relative min-h-screen overflow-hidden bg-black text-white">
@@ -176,6 +200,45 @@ function SectionHeader({ eyebrow, title, intro }: { eyebrow: string; title: stri
       <h2 className="mb-5 text-3xl font-normal leading-tight md:text-5xl">{title}</h2>
       <p className="text-base leading-7 text-gray-300 md:text-lg">{intro}</p>
     </div>
+  );
+}
+
+function DocumentEmbed({ artifact }: { artifact: (typeof researchArtifacts)[number] }) {
+  const [origin, setOrigin] = useState('');
+
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
+
+  const src =
+    artifact.embed === 'office' && origin
+      ? `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(`${origin}${artifact.href}`)}`
+      : artifact.embed === 'office'
+        ? ''
+        : artifact.embed;
+
+  return (
+    <article className="liquid-glass rounded-xl p-5">
+      <div className="mb-4">
+        <p className="mb-2 text-sm uppercase tracking-[0.24em] text-gray-400">Research Artifact</p>
+        <h3 className="mb-2 text-xl font-medium">{artifact.title}</h3>
+        <p className="leading-7 text-gray-300">{artifact.description}</p>
+      </div>
+      <div className="mb-4 h-[420px] overflow-hidden rounded-lg border border-white/20 bg-black">
+        {src ? (
+          <iframe className="h-full w-full" src={src} title={artifact.title} />
+        ) : (
+          <div className="flex h-full items-center justify-center p-6 text-center text-gray-300">{artifact.title}</div>
+        )}
+      </div>
+      <a
+        className="inline-flex rounded-lg bg-white px-5 py-3 text-sm font-medium text-black transition hover:bg-gray-100"
+        href={artifact.href}
+        download
+      >
+        {artifact.action}
+      </a>
+    </article>
   );
 }
 
@@ -265,6 +328,17 @@ function App() {
               Download Full Research Paper
             </a>
           </aside>
+        </div>
+        <div className="mt-12">
+          <div className="mb-6 max-w-3xl">
+            <p className="mb-3 text-sm font-medium uppercase tracking-[0.24em] text-gray-400">Project Documents</p>
+            <h3 className="text-2xl font-normal leading-tight md:text-3xl">Research process files</h3>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {researchArtifacts.map((artifact) => (
+              <DocumentEmbed artifact={artifact} key={artifact.title} />
+            ))}
+          </div>
         </div>
       </section>
 
